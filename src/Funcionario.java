@@ -8,12 +8,10 @@ public class Funcionario extends Usuario {
         this.cargo = cargo;
     }
 
-    @Override
     public String getCpf() {
         return super.getCpf();
     }
 
-    @Override
     public String getEmail() {
         return super.getEmail();
     }
@@ -26,13 +24,13 @@ public class Funcionario extends Usuario {
         this.cargo = cargo;
     }
 
-    @Override
     public void listarInformacoes() {
         System.out.println(
-            "Nome: " + getNome() +
-            " | CPF: " + getCpf() +
-            " | Email: " + getEmail() +
-            " | Cargo: " + getCargo()
+            getNome() + " - " +
+            getCpf() + " - " +
+            getEmail() + " - " +
+            getCargo()
         );
     }
 }
+
