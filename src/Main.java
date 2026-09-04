@@ -9,87 +9,195 @@ public class Main {
         ArrayList<Livro> livros = new ArrayList<>();
         ArrayList<Usuario> usuarios = new ArrayList<>();
 
-        int op = 0;
+        int opcao = 0;
 
         do {
-            System.out.println("1-Livro");
-            System.out.println("2-Listar");
-            System.out.println("3-Usuario");
-            System.out.println("4-Listar usuarios");
-            System.out.println("5-Emprestar");
-            System.out.println("6-Devolver");
-            System.out.println("7-Sair");
+            System.out.println("\n===== BIBLIOTECA =====");
+            System.out.println("1 - Cadastrar Livro");
+            System.out.println("2 - Listar Livro");
+            System.out.println("3 - Cadastrar Usuario");
+            System.out.println("4 - Listar Usuarios");
+            System.out.println("5 - Efetuar Emprestimo");
+            System.out.println("6 - Efetuar Devolucao");
+            System.out.println("7 - Sair");
+            System.out.print("Digite uma opcao: ");
 
             try {
-                op = sc.nextInt();
+                opcao = sc.nextInt();
                 sc.nextLine();
 
-                switch (op) {
+                switch (opcao) {
 
                     case 1:
-                        System.out.print("Titulo: ");
-                        String t = sc.nextLine();
-                        System.out.print("Autor: ");
-                        String a = sc.nextLine();
-                        System.out.print("Ano: ");
-                        int ano = sc.nextInt();
+                        System.out.println("\n--- CADASTRAR LIVRO ---");
 
-                        livros.add(new Livro(t, a, ano));
+                        System.out.print("Titulo: ");
+                        String titulo = sc.nextLine();
+
+                        System.out.print("Autor: ");
+                        String autor = sc.nextLine();
+
+                        int ano;
+                        while (true) {
+                            try {
+                                System.out.print("Ano de publicacao: ");
+                                ano = sc.nextInt();
+                                sc.nextLine();
+                                break;
+                            } catch (Exception e) {
+                                System.out.println("Digite somente numeros.");
+                                sc.nextLine();
+                            }
+                        }
+
+                        livros.add(new Livro(titulo, autor, ano));
+                        System.out.println("Livro cadastrado com sucesso!");
                         break;
 
                     case 2:
-                        for (Livro l : livros)
-                            System.out.println(l.getTitulo());
+                        System.out.println("\n--- LIVROS CADASTRADOS ---");
+
+                        if (livros.isEmpty()) {
+                            System.out.println("Nenhum livro cadastrado.");
+                        } else {
+                            for (Livro l : livros) {
+                                System.out.println(
+                                    "Titulo: " + l.getTitulo() +
+                                    " | Autor: " + l.getAutor() +
+                                    " | Ano: " + l.getAno() +
+                                    " | Disponivel: " + l.isDisponivel()
+                                );
+                            }
+                        }
                         break;
 
                     case 3:
+                        System.out.println("\n--- CADASTRAR USUARIO ---");
+
                         System.out.print("Nome: ");
-                        String n = sc.nextLine();
+                        String nome = sc.nextLine();
+
                         System.out.print("CPF: ");
                         String cpf = sc.nextLine();
+
                         System.out.print("Email: ");
                         String email = sc.nextLine();
 
-                        System.out.print("1-Aluno 2-Funcionario: ");
+                        System.out.println("1 - Aluno");
+                        System.out.println("2 - Funcionario");
+                        System.out.print("Digite o tipo: ");
                         int tipo = sc.nextInt();
                         sc.nextLine();
 
                         if (tipo == 1) {
                             System.out.print("Curso: ");
                             String curso = sc.nextLine();
+
                             System.out.print("Turma: ");
                             String turma = sc.nextLine();
-                            usuarios.add(new Aluno(n, cpf, email, curso, turma));
-                        } else {
+
+                            usuarios.add(new Aluno(nome, cpf, email, curso, turma));
+                            System.out.println("Aluno cadastrado com sucesso!");
+
+                        } else if (tipo == 2) {
                             System.out.print("Cargo: ");
                             String cargo = sc.nextLine();
-                            usuarios.add(new Funcionario(n, cpf, email, cargo));
+
+                            usuarios.add(new Funcionario(nome, cpf, email, cargo));
+                            System.out.println("Funcionario cadastrado com sucesso!");
+
+                        } else {
+                            System.out.println("Tipo de usuario invalido.");
                         }
                         break;
 
                     case 4:
-                        for (Usuario u : usuarios)
-                            u.listarInformacoes();
+                        System.out.println("\n--- USUARIOS CADASTRADOS ---");
+
+                        if (usuarios.isEmpty()) {
+                            System.out.println("Nenhum usuario cadastrado.");
+                        } else {
+                            for (Usuario u : usuarios) {
+                                u.listarInformacoes();
+                            }
+                        }
                         break;
 
                     case 5:
-                        int e = sc.nextInt() - 1;
-                        if (e >= 0 && e < livros.size()
-                                && livros.get(e).isDisponivel())
-                            livros.get(e).emprestar();
+                        System.out.println("\n--- EMPRESTIMO ---");
+
+                        if (livros.isEmpty()) {
+                            System.out.println("Nenhum livro cadastrado.");
+                            break;
+                        }
+
+                        for (int i = 0; i < livros.size(); i++) {
+                            System.out.println((i + 1) + " - " + livros.get(i).getTitulo());
+                        }
+
+                        System.out.print("Digite o numero do livro: ");
+                        int livroEmprestimo = sc.nextInt() - 1;
+                        sc.nextLine();
+
+                        if (livroEmprestimo >= 0 && livroEmprestimo < livros.size()) {
+                            Livro l = livros.get(livroEmprestimo);
+
+                            if (l.isDisponivel()) {
+                                l.emprestar();
+                                System.out.println("Emprestimo realizado!");
+                            } else {
+                                System.out.println("Livro ja esta emprestado.");
+                            }
+                        } else {
+                            System.out.println("Livro invalido.");
+                        }
                         break;
 
                     case 6:
-                        int d = sc.nextInt() - 1;
-                        if (d >= 0 && d < livros.size())
-                            livros.get(d).devolver();
+                        System.out.println("\n--- DEVOLUCAO ---");
+
+                        if (livros.isEmpty()) {
+                            System.out.println("Nenhum livro cadastrado.");
+                            break;
+                        }
+
+                        for (int i = 0; i < livros.size(); i++) {
+                            System.out.println((i + 1) + " - " + livros.get(i).getTitulo());
+                        }
+
+                        System.out.print("Digite o numero do livro: ");
+                        int livroDevolucao = sc.nextInt() - 1;
+                        sc.nextLine();
+
+                        if (livroDevolucao >= 0 && livroDevolucao < livros.size()) {
+                            Livro l = livros.get(livroDevolucao);
+
+                            if (!l.isDisponivel()) {
+                                l.devolver();
+                                System.out.println("Devolucao realizada!");
+                            } else {
+                                System.out.println("Livro ja esta disponivel.");
+                            }
+                        } else {
+                            System.out.println("Livro invalido.");
+                        }
                         break;
+
+                    case 7:
+                        System.out.println("Sistema encerrado!");
+                        break;
+
+                    default:
+                        System.out.println("Opcao invalida.");
                 }
 
             } catch (Exception e) {
+                System.out.println("Digite somente numeros.");
                 sc.nextLine();
             }
 
-        } while (op != 7);
+        } while (opcao != 7);
+
+        sc.close();
     }
 }
