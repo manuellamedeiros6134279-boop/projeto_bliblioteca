@@ -10,12 +10,10 @@ public class Aluno extends Usuario {
         this.turma = turma;
     }
 
-    @Override
     public String getCpf() {
         return super.getCpf();
     }
 
-    @Override
     public String getEmail() {
         return super.getEmail();
     }
@@ -36,14 +34,14 @@ public class Aluno extends Usuario {
         this.turma = turma;
     }
 
-    @Override
     public void listarInformacoes() {
         System.out.println(
-            "Nome: " + getNome() +
-            " | CPF: " + getCpf() +
-            " | Email: " + getEmail() +
-            " | Curso: " + getCurso() +
-            " | Turma: " + getTurma()
+            getNome() + " - " +
+            getCpf() + " - " +
+            getEmail() + " - " +
+            getCurso() + " - " +
+            getTurma()
         );
     }
 }
+
