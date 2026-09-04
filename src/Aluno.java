@@ -1,3 +1,4 @@
+```java
 public class Aluno extends Usuario {
 
     private String curso;
@@ -7,6 +8,16 @@ public class Aluno extends Usuario {
         super(nome, cpf, email);
         this.curso = curso;
         this.turma = turma;
+    }
+
+    @Override
+    public String getCpf() {
+        return super.getCpf();
+    }
+
+    @Override
+    public String getEmail() {
+        return super.getEmail();
     }
 
     public String getCurso() {
@@ -25,7 +36,15 @@ public class Aluno extends Usuario {
         this.turma = turma;
     }
 
+    @Override
     public void listarInformacoes() {
-        System.out.println(getNome() + " - " + curso + " - " + turma);
+        System.out.println(
+            "Nome: " + getNome() +
+            " | CPF: " + getCpf() +
+            " | Email: " + getEmail() +
+            " | Curso: " + getCurso() +
+            " | Turma: " + getTurma()
+        );
     }
 }
+```
