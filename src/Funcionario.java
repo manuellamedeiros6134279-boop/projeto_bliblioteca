@@ -1,3 +1,4 @@
+
 public class Funcionario extends Usuario {
 
     private String cargo;
@@ -5,6 +6,16 @@ public class Funcionario extends Usuario {
     public Funcionario(String nome, String cpf, String email, String cargo) {
         super(nome, cpf, email);
         this.cargo = cargo;
+    }
+
+    @Override
+    public String getCpf() {
+        return super.getCpf();
+    }
+
+    @Override
+    public String getEmail() {
+        return super.getEmail();
     }
 
     public String getCargo() {
@@ -15,7 +26,13 @@ public class Funcionario extends Usuario {
         this.cargo = cargo;
     }
 
+    @Override
     public void listarInformacoes() {
-        System.out.println(getNome() + " - " + cargo);
+        System.out.println(
+            "Nome: " + getNome() +
+            " | CPF: " + getCpf() +
+            " | Email: " + getEmail() +
+            " | Cargo: " + getCargo()
+        );
     }
 }
