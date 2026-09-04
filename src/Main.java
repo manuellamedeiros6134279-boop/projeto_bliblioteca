@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -39,23 +38,20 @@ public class Main {
                         System.out.print("Autor: ");
                         String autor = sc.nextLine();
 
-                        int ano;
+                        int ano = 0;
 
-                        while (true) {
-                            try {
-                                System.out.print("Ano de publicacao: ");
-                                ano = sc.nextInt();
-                                sc.nextLine();
-                                break;
-                            } catch (Exception e) {
-                                System.out.println("Digite somente numeros.");
-                                sc.nextLine();
-                            }
+                        try {
+                            System.out.print("Ano de publicacao: ");
+                            ano = sc.nextInt();
+                            sc.nextLine();
+                        } catch (Exception e) {
+                            System.out.println("Erro ao ler o ano. O livro sera registrado com ano 0.");
+                            sc.nextLine();
                         }
 
                         livros.add(new Livro(titulo, autor, ano));
 
-                        System.out.println("Livro cadastrado com sucesso!");
+                        System.out.println("usuario cadastrado! Livro cadastrado com sucesso!");
                         break;
 
                     case 2:
@@ -106,7 +102,7 @@ public class Main {
                                 new Aluno(nome, cpf, email, curso, turma)
                             );
 
-                            System.out.println("Usuario cadastrado com sucesso!");
+                            System.out.println("usuario cadastrado!");
 
                         } else if (tipo == 2) {
 
@@ -117,7 +113,7 @@ public class Main {
                                 new Funcionario(nome, cpf, email, cargo)
                             );
 
-                            System.out.println("Usuario cadastrado com sucesso!");
+                            System.out.println("usuario cadastrado!");
 
                         } else {
                             System.out.println("Tipo de usuario invalido.");
@@ -163,7 +159,7 @@ public class Main {
 
                             if (l.isDisponivel()) {
                                 l.emprestar();
-                                System.out.println("Emprestimo realizado!");
+                                System.out.println("empréstimo realizado!");
                             } else {
                                 System.out.println("Livro ja esta emprestado.");
                             }
@@ -199,7 +195,7 @@ public class Main {
 
                             if (!l.isDisponivel()) {
                                 l.devolver();
-                                System.out.println("Devolucao realizada!");
+                                System.out.println("devolução realizada!");
                             } else {
                                 System.out.println("Livro ja esta disponivel.");
                             }
@@ -220,7 +216,7 @@ public class Main {
                 }
 
             } catch (Exception e) {
-                System.out.println("Digite somente numeros.");
+                System.out.println("Erro: Digite somente numeros.");
                 sc.nextLine();
             }
 
