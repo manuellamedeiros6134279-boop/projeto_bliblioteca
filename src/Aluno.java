@@ -1,4 +1,3 @@
-
 public class Aluno extends Usuario {
 
     private String curso;
@@ -35,6 +34,7 @@ public class Aluno extends Usuario {
     }
 
     public void listarInformacoes() {
+        
         System.out.println(
             getNome() + " - " +
             getCpf() + " - " +
@@ -44,4 +44,5 @@ public class Aluno extends Usuario {
         );
     }
 }
+
 
