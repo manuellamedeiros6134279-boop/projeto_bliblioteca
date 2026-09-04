@@ -1,4 +1,4 @@
-```java
+
 public class Aluno extends Usuario {
 
     private String curso;
@@ -47,4 +47,3 @@ public class Aluno extends Usuario {
         );
     }
 }
-```
